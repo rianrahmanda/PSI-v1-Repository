@@ -1,0 +1,178 @@
+<style>
+  .sb-root {
+    font-family: "Space Grotesk", sans-serif;
+    color: #e2e8f0;
+    padding: 0 0.25rem;
+  }
+
+  .sb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.375rem;
+    padding: 0.2rem 0.6rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    color: #3b82f6;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .sb-chip-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: #3b82f6;
+    animation: sbpulse 2s infinite;
+  }
+  @keyframes sbpulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .sb-desc {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+  }
+  .sb-desc strong {
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+
+  .sb-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-bottom: 1.5rem;
+  }
+  .sb-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #64748b;
+    border: 1px solid #1e2d42;
+    border-radius: 0.25rem;
+    padding: 0.15rem 0.45rem;
+  }
+
+  .sb-divider {
+    height: 1px;
+    background: linear-gradient(90deg, #1e2d42, transparent);
+    margin-bottom: 1.25rem;
+  }
+
+  .sb-section-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #3b82f6;
+    margin-bottom: 0.625rem;
+  }
+
+  .rubric-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.6875rem;
+  }
+  .rubric-table thead tr {
+    border-bottom: 1px solid #1e2d42;
+  }
+  .rubric-table th {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.5625rem;
+    color: #334155;
+    padding: 0 0.5rem 0.5rem;
+    text-align: left;
+    font-weight: 400;
+  }
+  .rubric-table td {
+    padding: 0.5rem 0.5rem;
+    border-bottom: 1px solid #0f1520;
+  }
+  .rubric-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .rubric-table tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .col-pct {
+    color: #64748b;
+    width: 2.5rem;
+  }
+  .col-psi {
+    font-weight: 700;
+    width: 1.75rem;
+    text-align: center;
+  }
+  .col-cat {
+    color: #e2e8f0;
+  }
+  .col-dot {
+    width: 1rem;
+    text-align: right;
+  }
+  .dot {
+    display: inline-block;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+  }
+</style>
+
+<div class="sb-root">
+  <div class="sb-chip">
+    <span class="sb-chip-dot"></span>
+    PSI Analyzer v1.0
+  </div>
+
+  <p class="sb-desc">
+    Automated <strong>structural damage assessment</strong> using adaptive
+    thresholding and contour analysis. Upload a facade image to compute its
+    <strong>Photo Severity Index</strong>.
+  </p>
+
+  <div class="sb-tags">
+    {% for tag in pipeline_tags %}
+    <span class="sb-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="sb-divider"></div>
+  <div class="sb-section-label">// Severity rubric</div>
+
+  <table class="rubric-table">
+    <thead>
+      <tr>
+        <th>Max %</th>
+        <th style="text-align: center">PSI</th>
+        <th>Category</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for upper, psi, category, color in rubric_rows %}
+      <tr>
+        <td class="col-pct">{{ upper }}</td>
+        <td class="col-psi" style="color:{{ color }}">{{ psi }}</td>
+        <td class="col-cat">{{ category }}</td>
+        <td class="col-dot">
+          <span class="dot" style="background:{{ color }}"></span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
