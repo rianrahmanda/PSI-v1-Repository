@@ -1,0 +1,4 @@
+# Notebooks are Colab artifacts, not maintained source — exclude from lint/format.
+extend-exclude = ["notebook/"]
+
+line-length = 100
