@@ -31,35 +31,70 @@ The system evaluates the computed damage percentage and assigns a specific sever
 ---
 
 ## 🧠 Algorithmic Workflow
-1.  **Image Ingestion:** Loads the source file into memory using OpenCV.
-2.  **Color Space Optimization:** Converts BGR channels to Grayscale to simplify pixel intensity mapping.
-3.  **Binarization:** Applies an inverse adaptive threshold to turn relevant surface damage structures into isolated binary objects.
-4.  **Morphological Segmentation:** Detects external contours (`cv2.findContours`) and filters out minor noise where the contour area is less than or equal to 100 pixels.
-5.  **Metrics Generation:** Aggregates valid damaged areas against total pixel dimensions to derive a pure percentage metric.
-6.  **Classification:** Evaluates the index tier and logs total computational runtime.
-7.  **Rendering:** Layers rectangular ROI bounding-boxes and blending masks over the original frame.
+
+1. **Image Ingestion:** Loads the source file into memory using OpenCV.
+2. **Color Space Optimization:** Converts BGR channels to Grayscale to simplify pixel intensity mapping.
+3. **Binarization:** Applies an inverse adaptive threshold to turn relevant surface damage structures into isolated binary objects.
+4. **Morphological Segmentation:** Detects external contours (`cv2.findContours`) and filters out minor noise where the contour area is less than or equal to 100 pixels.
+5. **Metrics Generation:** Aggregates valid damaged areas against total pixel dimensions to derive a pure percentage metric.
+6. **Classification:** Evaluates the index tier and logs total computational runtime.
+7. **Rendering:** Layers rectangular ROI bounding-boxes and blending masks over the original frame.
 
 ---
 
 ## 🛠️ Environment & Prerequisites
 
-This workflow is optimized out-of-the-box for **Google Colab** to make use of cloud file-upload dialogs and inline image rendering patches (`cv2_imshow`).
+The project ships as a **Streamlit** web application. You upload an image through the browser and the app renders the analysis inline.
 
 ### Core Dependencies
-Ensure you have the following packages installed if running inside a cloud environment:
-* Python 3.x
-* OpenCV (`opencv-python`)
-* NumPy
+
+* Python 3.9+
+* [Streamlit](https://streamlit.io/) (`streamlit>=1.30`)
+* OpenCV (`opencv-python-headless>=4.8`)
+* NumPy (`numpy>=1.24`)
+* Pillow (`pillow>=10.0`)
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Installation & Running
 
-1.  Create a new notebook inside **Google Colab**.
-2.  Create a file named `main.py` or paste the code into an empty cell.
-3.  Execute the cell. A file picker button will appear under the console output.
-    > 💡 **Tip:** Upload a clear, high-resolution JPEG or PNG image of the affected building facade for the most accurate assessment results.
-4.  The notebook will render three distinct image arrays (Original, ROI bounding boxes, and Masked) followed by a comprehensive analytical breakdown report.
+Clone the repository, then choose one of the workflows below.
+
+```bash
+git clone https://github.com/<owner>/PSI-v1-Repository.git
+cd PSI-v1-Repository
+```
+
+### Option A — using `just` (recommended)
+
+Requires [`just`](https://github.com/casey/just). Creates a local virtualenv in `.venv/` and installs all dependencies.
+
+```bash
+just install   # create venv + install requirements
+just dev       # launch the Streamlit dev server
+```
+
+### Option B — plain `venv` + `pip`
+
+```bash
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install --upgrade pip
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Once the server starts, open the printed URL (default <http://localhost:8501>) in your browser.
+
+> 💡 **Tip:** Upload a clear, high-resolution JPEG or PNG image of the affected building facade for the most accurate assessment results. The app renders the Original, ROI bounding-box, and Masked views alongside the full analytical breakdown.
+
+### Useful commands
+
+| Command | Purpose |
+| :--- | :--- |
+| `just test` | Run the unit test suite (`pytest`) |
+| `just lint` | Lint with `ruff` |
+| `just format` | Auto-format with `ruff` |
 
 ---
 
