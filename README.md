@@ -4,6 +4,48 @@ An automated computer vision solution developed in Python to detect, segment, an
 
 ---
 
+## 🚀 Installation & Running
+
+Clone the repository, then choose one of the workflows below.
+
+```bash
+git clone https://github.com/<owner>/PSI-v1-Repository.git
+cd PSI-v1-Repository
+```
+
+### Option A — using `just` (recommended)
+
+Requires [`just`](https://github.com/casey/just). Creates a local virtualenv in `.venv/` and installs all dependencies.
+
+```bash
+just install   # create venv + install requirements
+just dev       # launch the Streamlit dev server
+```
+
+### Option B — plain `venv` + `pip`
+
+```bash
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install --upgrade pip
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Once the server starts, open the printed URL (default <http://localhost:8501>) in your browser.
+
+> 💡 **Tip:** Upload a clear, high-resolution JPEG or PNG image of the affected building facade for the most accurate assessment results. The app renders the Original, ROI bounding-box, and Masked views alongside the full analytical breakdown.
+
+### Useful commands
+
+| Command | Purpose |
+| :--- | :--- |
+| `just test` | Run the unit test suite (`pytest`) |
+| `just lint` | Lint with `ruff` |
+| `just format` | Auto-format with `ruff` |
+
+---
+
 ## ⚙️ Key Features
 
 * **Gaussian Adaptive Thresholding:** Dynamically isolates damaged textures or surface cracks under varying or uneven lighting conditions.
@@ -53,48 +95,6 @@ The project ships as a **Streamlit** web application. You upload an image throug
 * OpenCV (`opencv-python-headless>=4.8`)
 * NumPy (`numpy>=1.24`)
 * Pillow (`pillow>=10.0`)
-
----
-
-## 🚀 Installation & Running
-
-Clone the repository, then choose one of the workflows below.
-
-```bash
-git clone https://github.com/<owner>/PSI-v1-Repository.git
-cd PSI-v1-Repository
-```
-
-### Option A — using `just` (recommended)
-
-Requires [`just`](https://github.com/casey/just). Creates a local virtualenv in `.venv/` and installs all dependencies.
-
-```bash
-just install   # create venv + install requirements
-just dev       # launch the Streamlit dev server
-```
-
-### Option B — plain `venv` + `pip`
-
-```bash
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-Once the server starts, open the printed URL (default <http://localhost:8501>) in your browser.
-
-> 💡 **Tip:** Upload a clear, high-resolution JPEG or PNG image of the affected building facade for the most accurate assessment results. The app renders the Original, ROI bounding-box, and Masked views alongside the full analytical breakdown.
-
-### Useful commands
-
-| Command | Purpose |
-| :--- | :--- |
-| `just test` | Run the unit test suite (`pytest`) |
-| `just lint` | Lint with `ruff` |
-| `just format` | Auto-format with `ruff` |
 
 ---
 
