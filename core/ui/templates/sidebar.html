@@ -1,7 +1,7 @@
 <style>
   .sb-root {
     font-family: "Space Grotesk", sans-serif;
-    color: #e2e8f0;
+    color: var(--text-primary);
     padding: 0 0.25rem;
   }
 
@@ -16,7 +16,7 @@
     font-family: "JetBrains Mono", monospace;
     font-size: 0.625rem;
     letter-spacing: 0.1em;
-    color: #3b82f6;
+    color: var(--blue);
     text-transform: uppercase;
     margin-bottom: 0.75rem;
   }
@@ -24,7 +24,7 @@
     width: 0.4rem;
     height: 0.4rem;
     border-radius: 50%;
-    background: #3b82f6;
+    background: var(--blue);
     animation: sbpulse 2s infinite;
   }
   @keyframes sbpulse {
@@ -40,11 +40,11 @@
   .sb-desc {
     font-size: 0.8125rem;
     line-height: 1.6;
-    color: #94a3b8;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
   }
   .sb-desc strong {
-    color: #e2e8f0;
+    color: var(--text-primary);
     font-weight: 600;
   }
 
@@ -59,15 +59,15 @@
     font-size: 0.5625rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #64748b;
-    border: 1px solid #1e2d42;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
     border-radius: 0.25rem;
     padding: 0.15rem 0.45rem;
   }
 
   .sb-divider {
     height: 1px;
-    background: linear-gradient(90deg, #1e2d42, transparent);
+    background: linear-gradient(90deg, var(--border), transparent);
     margin-bottom: 1.25rem;
   }
 
@@ -76,7 +76,7 @@
     font-size: 0.5625rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #3b82f6;
+    color: var(--blue);
     margin-bottom: 0.625rem;
   }
 
@@ -87,29 +87,29 @@
     font-size: 0.6875rem;
   }
   .rubric-table thead tr {
-    border-bottom: 1px solid #1e2d42;
+    border-bottom: 1px solid var(--border);
   }
   .rubric-table th {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 0.5625rem;
-    color: #334155;
+    color: var(--text-faint);
     padding: 0 0.5rem 0.5rem;
     text-align: left;
     font-weight: 400;
   }
   .rubric-table td {
     padding: 0.5rem 0.5rem;
-    border-bottom: 1px solid #0f1520;
+    border-bottom: 1px solid var(--border-soft);
   }
   .rubric-table tbody tr:last-child td {
     border-bottom: none;
   }
   .rubric-table tbody tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--hover-veil);
   }
   .col-pct {
-    color: #64748b;
+    color: var(--text-muted);
     width: 2.5rem;
   }
   .col-psi {
@@ -118,7 +118,7 @@
     text-align: center;
   }
   .col-cat {
-    color: #e2e8f0;
+    color: var(--text-primary);
   }
   .col-dot {
     width: 1rem;

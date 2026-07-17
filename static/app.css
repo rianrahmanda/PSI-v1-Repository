@@ -6,25 +6,49 @@
 
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
+/* Streamlit flips `color-scheme` on its app root when the theme changes,
+   so light-dark() re-resolves every token instantly — no rerun, no reload.
+   First value = light theme, second = dark (the design's native palette). */
 :root {
-	--bg-base: #090c12;
-	--bg-panel: #0f1520;
-	--bg-card: #141c2b;
-	--bg-card-hover: #182133;
-	--border: #1e2d42;
-	--border-accent: #2a3f5c;
+	--bg-base: light-dark(#f4f6fa, #090c12);
+	--bg-panel: light-dark(#ffffff, #0f1520);
+	--bg-card: light-dark(#ffffff, #141c2b);
+	--bg-card-hover: light-dark(#eef2f8, #182133);
+	--border: light-dark(#dbe3ee, #1e2d42);
+	--border-accent: light-dark(#b6c5da, #2a3f5c);
 	--amber-dim: #1d4ed8;
 	--blue: #3b82f6;
-	--text-primary: #e2e8f0;
+	--text-primary: light-dark(#1e293b, #e2e8f0);
+	--text-secondary: light-dark(#475569, #94a3b8);
 	--text-muted: #64748b;
+	--text-faint: light-dark(#94a3b8, #334155);
+	--border-soft: light-dark(#e8edf5, #0f1520);
+	--hover-veil: light-dark(rgba(15, 23, 42, 0.03), rgba(255, 255, 255, 0.02));
+	--track: light-dark(#e2e8f0, #141c2b);
+	--grid-opacity: light-dark(0.45, 0.25);
+	--glass-bg: light-dark(rgba(255, 255, 255, 0.75), rgba(15, 21, 32, 0.7));
+	--glass-border: light-dark(rgba(15, 23, 42, 0.12), rgba(255, 255, 255, 0.15));
+	--img-hover-brightness: light-dark(0.92, 0.75);
+	--card-shadow: light-dark(0 1px 3px rgba(15, 23, 42, 0.06), none);
 	--mono: "JetBrains Mono", monospace;
 	--sans: "Space Grotesk", sans-serif;
 }
 
 /* ── Base ── */
+[data-testid="stAppViewContainer"],
 [data-testid="stAppViewContainer"] > .main {
-	background: var(--bg-base);
+	background: var(--bg-base) !important;
 	font-family: var(--sans);
+}
+
+/* Streamlit's sticky toolbar ships with a stock background that ignores
+   our palette — blend it into the app so there is no strip at the top. */
+[data-testid="stHeader"] {
+	background: var(--bg-base) !important;
+}
+
+[data-testid="stHeader"] [data-testid="stToolbar"] {
+	color: var(--text-muted) !important;
 }
 
 /* reduce Streamlit's generous default block container padding */
@@ -41,7 +65,7 @@
 		linear-gradient(var(--border) 1px, transparent 1px),
 		linear-gradient(90deg, var(--border) 1px, transparent 1px);
 	background-size: 48px 48px;
-	opacity: 0.25;
+	opacity: var(--grid-opacity);
 	pointer-events: none;
 	z-index: 0;
 }
@@ -101,6 +125,7 @@ h1::after {
 	padding: 1rem 1.25rem !important;
 	position: relative;
 	overflow: hidden;
+	box-shadow: var(--card-shadow) !important;
 }
 
 [data-testid="stMetric"]::before {
@@ -132,7 +157,7 @@ h1::after {
 
 /* ── Progress bar ── */
 [data-testid="stProgressBar"] > div {
-	background: var(--bg-card) !important;
+	background: var(--track) !important;
 	border-radius: 0.25rem !important;
 	height: 6px !important;
 }
@@ -148,6 +173,7 @@ h1::after {
 	overflow: hidden;
 	border-radius: 0.5rem;
 	border: 1px solid var(--border);
+	box-shadow: var(--card-shadow);
 }
 
 [data-testid="stImageContainer"] img {
@@ -159,7 +185,7 @@ h1::after {
 
 [data-testid="stImageContainer"]:hover img {
 	transform: scale(1.02);
-	filter: brightness(0.75);
+	filter: brightness(var(--img-hover-brightness));
 }
 
 [data-testid="stCaptionContainer"] {
@@ -187,10 +213,11 @@ h1::after {
 	right: unset !important;
 	width: 3rem !important;
 	height: 3rem !important;
-	background: rgba(15, 21, 32, 0.7) !important;
+	background: var(--glass-bg) !important;
+	color: var(--text-primary) !important;
 	backdrop-filter: blur(8px) !important;
 	-webkit-backdrop-filter: blur(8px) !important;
-	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	border: 1px solid var(--glass-border) !important;
 	border-radius: 50% !important;
 	display: flex !important;
 	align-items: center !important;

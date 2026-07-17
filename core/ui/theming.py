@@ -23,7 +23,13 @@ def render_template(name: str, **ctx: Any) -> str:
 
 
 def inject_base() -> None:
-    """Inject base CSS (fonts + app styles) into the page once."""
+    """Inject base CSS (fonts + app styles) into the page once.
+
+    Theme switching is handled entirely in CSS via light-dark(): Streamlit
+    flips `color-scheme` on the app root instantly when the user changes
+    theme, so no server-side detection (st.context.theme) is needed — that
+    API is stale during theme changes and would require a page reload.
+    """
     # Mark CSS as safe so Jinja2 autoescaping does not mangle attribute
     # selectors like [data-testid="..."] into &#34; entities (invalid CSS).
     html = render_template("base.html", css_content=Markup(_CSS_PATH.read_text()))
