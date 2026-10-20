@@ -6,40 +6,52 @@ An automated computer vision solution developed in Python to detect, segment, an
 
 ## 🚀 Installation & Running
 
-Clone the repository, then choose one of the workflows below.
+You need **Python 3.10 or newer** and **Git**. Check with `python --version` (on Windows you can also use `py --version`).
+
+### Linux / macOS
 
 ```bash
-git clone https://github.com/<owner>/PSI-v1-Repository.git
+git clone https://github.com/rianrahmanda/PSI-v1-Repository.git
 cd PSI-v1-Repository
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m streamlit run app.py
 ```
 
-### Option A — using `just` (recommended)
+### Windows (Command Prompt)
 
-Requires [`just`](https://github.com/casey/just). Creates a local virtualenv in `.venv/` and installs all dependencies.
-
-```bash
-just install   # create venv + install requirements
-just dev       # launch the Streamlit dev server
+```bat
+git clone https://github.com/rianrahmanda/PSI-v1-Repository.git
+cd PSI-v1-Repository
+py -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m streamlit run app.py
 ```
 
-### Option B — plain `venv` + `pip`
+The same commands work in PowerShell. If `py` is not found, use `python` instead.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app.py
-```
+The install step runs once. Next time, only run the last line.
 
-Once the server starts, open the printed URL (default <http://localhost:8501>) in your browser.
+When the server starts, open <http://localhost:8501> in your browser. Press `Ctrl+C` in the terminal to stop it.
 
 > 💡 **Tip:** Upload a clear, high-resolution JPEG or PNG image of the affected building facade for the most accurate assessment results. The app renders the Original, ROI bounding-box, and Masked views alongside the full analytical breakdown.
 
-### Useful commands
+### Troubleshooting
+
+| Problem | Fix |
+| :--- | :--- |
+| `'python' is not recognized` (Windows) | Install Python from [python.org](https://www.python.org/downloads/) and tick **Add python.exe to PATH**, or use `py`. |
+| `No module named venv` (Debian/Ubuntu) | `sudo apt install python3-venv` |
+| Port 8501 is busy | Add `--server.port 8502` to the run command. |
+
+### Developer commands (Linux / macOS, needs [`just`](https://github.com/casey/just))
+
+The `justfile` uses `bash`, so these recipes do not run in Windows Command Prompt.
 
 | Command | Purpose |
 | :--- | :--- |
+| `just install` | Create `.venv/` and install requirements plus `ruff` |
+| `just dev` | Start the Streamlit dev server |
 | `just test` | Run the unit test suite (`pytest`) |
 | `just lint` | Lint with `ruff` |
 | `just format` | Auto-format with `ruff` |
@@ -90,7 +102,7 @@ The project ships as a **Streamlit** web application. You upload an image throug
 
 ### Core Dependencies
 
-* Python 3.9+
+* Python 3.10+
 * [Streamlit](https://streamlit.io/) (`streamlit>=1.30`)
 * OpenCV (`opencv-python-headless>=4.8`)
 * NumPy (`numpy>=1.24`)
