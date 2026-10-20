@@ -32,5 +32,5 @@ def inject_base() -> None:
     """
     # Mark CSS as safe so Jinja2 autoescaping does not mangle attribute
     # selectors like [data-testid="..."] into &#34; entities (invalid CSS).
-    html = render_template("base.html", css_content=Markup(_CSS_PATH.read_text()))
+    html = render_template("base.html", css_content=Markup(_CSS_PATH.read_text(encoding="utf-8")))
     st.html(html)
