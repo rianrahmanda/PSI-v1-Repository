@@ -8,23 +8,43 @@ A Python computer vision tool that detects, segments, and categorizes structural
 
 You need **Python 3.10 or newer**. Run these commands inside the project folder.
 
-**Windows (Command Prompt or PowerShell)**
+### Windows (Command Prompt or PowerShell)
+
+Install (one time):
 
 ```bat
 py -m venv .venv
-.venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\python -m streamlit run app.py
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-**macOS / Linux**
+Run:
+
+```bat
+.venv\Scripts\activate
+streamlit run app.py
+```
+
+### macOS / Linux
+
+Install (one time):
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python -m streamlit run app.py
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-Open <http://localhost:8501> and upload an image of a building facade (JPEG, PNG, BMP, or WebP). Next time, run only the last line.
+Run:
+
+```bash
+source .venv/bin/activate
+streamlit run app.py
+```
+
+After activation, your prompt starts with `(.venv)`. You only need to activate once per terminal window.
+
+Open <http://localhost:8501> and upload an image of a building facade (JPEG, PNG, BMP, or WebP). Press `Ctrl+C` to stop the app. Type `deactivate` to leave the environment.
 
 Need help with Python, Git, or errors? See the full guide for [Windows](docs/install-windows.md), [macOS](docs/install-macos.md), or [Linux](docs/install-linux.md).
 

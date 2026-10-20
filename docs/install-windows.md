@@ -27,20 +27,26 @@ cd PSI-v1-Repository
 
 ```bat
 py -m venv .venv
-.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
+
+After activation, your prompt starts with `(.venv)`.
 
 ## 4. Run
 
 ```bat
-.venv\Scripts\python -m streamlit run app.py
+.venv\Scripts\activate
+streamlit run app.py
 ```
 
-Open <http://localhost:8501> in your browser. Press `Ctrl+C` in the terminal to stop the app.
+You only need to activate once per terminal window. If your prompt already shows `(.venv)`, skip the first line.
+
+Open <http://localhost:8501> in your browser. Press `Ctrl+C` in the terminal to stop the app. Type `deactivate` to leave the environment.
 
 Next time, open a terminal inside the project folder and run only step 4.
 
-These commands also work in PowerShell.
+These commands work in Command Prompt and PowerShell.
 
 ## Troubleshooting
 
@@ -48,4 +54,6 @@ These commands also work in PowerShell.
 | :--- | :--- |
 | `'py' is not recognized` | Use `python` instead of `py`. If that also fails, install Python again and tick **Add python.exe to PATH**. |
 | `'git' is not recognized` | Use the **Download ZIP** option in step 2. |
+| PowerShell: `running scripts is disabled on this system` | Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then activate again. Or use Command Prompt. |
+| `'streamlit' is not recognized` | The environment is not active. Run `.venv\Scripts\activate` first. |
 | Port 8501 is busy | Add `--server.port 8502` to the run command. |

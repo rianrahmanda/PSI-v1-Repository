@@ -29,16 +29,22 @@ No Git? On the GitHub page, click **Code → Download ZIP**, extract it, and `cd
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
+
+After activation, your prompt starts with `(.venv)`.
 
 ## 4. Run
 
 ```bash
-.venv/bin/python -m streamlit run app.py
+source .venv/bin/activate
+streamlit run app.py
 ```
 
-Open <http://localhost:8501> in your browser. Press `Ctrl+C` in the terminal to stop the app.
+You only need to activate once per terminal window. If your prompt already shows `(.venv)`, skip the first line.
+
+Open <http://localhost:8501> in your browser. Press `Ctrl+C` in the terminal to stop the app. Type `deactivate` to leave the environment.
 
 Next time, `cd` into the project folder and run only step 4.
 
@@ -59,4 +65,5 @@ If you have [`just`](https://github.com/casey/just), these commands do the same 
 | Problem | Fix |
 | :--- | :--- |
 | `No module named venv` or `ensurepip is not available` | `sudo apt install python3-venv` (Debian/Ubuntu) |
+| `streamlit: command not found` | The environment is not active. Run `source .venv/bin/activate` first. |
 | Port 8501 is busy | Add `--server.port 8502` to the run command. |
